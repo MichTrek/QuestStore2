@@ -1,1 +1,1 @@
-document.write("helo2");
+alert("s");
