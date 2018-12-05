@@ -7,3 +7,12 @@
     background-repeat: no-repeat;
     background-size: cover;
     }
+    .users{
+            width:33%;
+            display:inline-block;
+
+    }
+    ul{
+        font-family:cursive;
+        text-align:center;
+    }
