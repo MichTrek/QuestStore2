@@ -27,7 +27,7 @@ tr:nth-child(even) {
     background-color: white
 }
 tr:nth-child(odd){
-  background-color: #eeff54;
+  background-color: #c9d5e8;
 }
 table{
 border: 3px solid red;

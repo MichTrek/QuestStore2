@@ -34,12 +34,15 @@ background-size: cover;
     font-size: 24px;
     margin:0;
   }
-.mentor{
+.student{
 width:100%
 }
-.coins{
-  width:100%
-  }
+.quest{
+width:100%
+}
+.artifact{
+width:100%
+}
 h1 {
   text-align: center;
   display: block;
