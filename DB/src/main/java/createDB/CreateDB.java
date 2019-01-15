@@ -10,5 +10,6 @@ public class CreateDB {
         CreateStudentsQuestTable createStudentsQuestTable = new CreateStudentsQuestTable();
         CreateStudentArtifactTable createStudentArtifactTable1 = new CreateStudentArtifactTable();
         CreateClassTable createClassTable = new CreateClassTable();
+        CreateStudentTable createStudentTable = new CreateStudentTable();
     }
 }
