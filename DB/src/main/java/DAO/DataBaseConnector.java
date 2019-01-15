@@ -5,7 +5,6 @@ import java.sql.*;
 public class DataBaseConnector {
 
     private Connection connection;
-    private Statement stmt;
 
     public void connect() {
         try {
