@@ -9,11 +9,10 @@ public class DataBaseConnector {
 
     public void connect() {
         try {
-            Class.forName("org.postgresql.Driver");
             connection = DriverManager
                     .getConnection("jdbc:postgresql://localhost:5432/queststore",
                             "queststore", "123");
-            connection.setAutoCommit(false);
+            System.out.println("Open database succesfully");
         } catch (Exception e) {
             e.printStackTrace();
         }
