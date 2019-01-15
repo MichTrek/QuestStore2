@@ -2,22 +2,19 @@ package createDB;
 
 import DAO.DataBaseConnector;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-
 public class CreateAdminTable {
-    public static void main(String args[]) {
-        Connection c = null;
-        try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/queststore",
-                            "queststore", "123");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName()+": "+e.getMessage());
-            System.exit(0);
-        }
-        System.out.println("Opened database successfully");
+    public CreateAdminTable(){
+        createAdminTable();
+    }
+    public void createAdminTable() {
+    String sql = "CREATE TABLE IF NOT EXISTS admin (" +
+            "ID SERIAL NOT NULL PRIMARY KEY," +
+            "first_name text NOT NULL," +
+            "last_name text NOT NULL," +
+            "email text NOT NULL," +
+            "phone_number text NOT NULL" +
+            ");";
+        DataBaseConnector dataBaseConnector = new DataBaseConnector();
+        dataBaseConnector.updateQuery(sql);
     }
 }

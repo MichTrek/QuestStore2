@@ -29,6 +29,7 @@ public class DataBaseConnector {
         }
     }
 
+
     public ResultSet query(String sql) {
         try {
             this.connect();
