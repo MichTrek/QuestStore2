@@ -5,5 +5,10 @@ public class CreateDB {
         CreateAdminTable createAdminTable = new CreateAdminTable();
         CreateMentorTable createMentorTable = new CreateMentorTable();
         CreateStudentArtifactTable createStudentArtifactTable = new CreateStudentArtifactTable();
+        CreateQuestTable createQuestTable = new CreateQuestTable();
+        CreateArtifactsTable createArtifactsTable = new CreateArtifactsTable();
+        CreateStudentsQuestTable createStudentsQuestTable = new CreateStudentsQuestTable();
+        CreateStudentArtifactTable createStudentArtifactTable1 = new CreateStudentArtifactTable();
+        CreateClassTable createClassTable = new CreateClassTable();
     }
 }
