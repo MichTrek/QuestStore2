@@ -10,7 +10,7 @@ alert("You added: \n id: " + id.value+" name : "+name.value+" sur: "+surname.val
 }
 function removeMentor(){
 var id = document.getElementById("idToRemove");
-alert("Mentor deleted " + id.value)
+alert("Mentor deleted " + id.value) 
 }
 
 
