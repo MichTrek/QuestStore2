@@ -14,7 +14,8 @@ public class CreateQuestTable {
         String querry = "CREATE TABLE IF NOT EXISTS quests(" +
                 "id SERIAL PRIMARY KEY, " +
                 "quest_name TEXT, " +
-                "quest_value INTEGER); ";
+                "quest_value INTEGER, " +
+                "quest_category INTEGER); ";
         createQuest(querry);
     }
     public void createQuest(String querry){

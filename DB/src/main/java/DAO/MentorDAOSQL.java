@@ -3,6 +3,7 @@ package DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 
 public class MentorDAOSQL implements MentorDAOInterface {
 DataBaseConnector dbConnector = new DataBaseConnector();
@@ -23,13 +24,25 @@ DataBaseConnector dbConnector = new DataBaseConnector();
             stmt.executeUpdate();
         }
         catch (SQLException e){
-
+           e.printStackTrace();
         }
     }
 
     @Override
-    public void addQuest() {
-
+    public void addQuest(String quest_name, int quest_value, int category) {
+        String sql = "INSERT INTO students (quest_name, quest_value, category) " +
+                "VALUES(?,?);";
+        try {
+            dbConnector.connect();
+            PreparedStatement stmt = dbConnector.getConnection().prepareStatement(sql);
+            stmt.setString(1,quest_name);
+            stmt.setInt(2,quest_value);
+            stmt.setInt(3,category);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -66,5 +79,6 @@ DataBaseConnector dbConnector = new DataBaseConnector();
     public static void main(String[] args) {
         MentorDAOSQL mds = new MentorDAOSQL();
         mds.createStudent("adam","maczek","1b","anna.naan@buziaczek.pl","0700990880",45,0);
+        mds.addQuest("zrobic_sniadanie",100, 2);
     }
 }

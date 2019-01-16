@@ -6,7 +6,7 @@ public interface MentorDAOInterface {
 
     void createStudent(String name, String last_name, String _class, String email, String phone_number, int coolCoins, int lvl);
 
-    void addQuest();
+    void addQuest(String quest_name, int quest_value, int category);
 
     void addQuestCategory();
 
