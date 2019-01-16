@@ -13,9 +13,9 @@ public class CreateStudentTable {
     public void creatingStudentTable(){
         String querry = "CREATE TABLE IF NOT EXISTS students(" +
                 "id SERIAL PRIMARY KEY, " +
-                "class TEXT, " +
                 "first_name TEXT, " +
                 "last_name TEXT, " +
+                "class TEXT, " +
                 "email TEXT, " +
                 "phone_number TEXT, " +
                 "cool_coins INTEGER, " +

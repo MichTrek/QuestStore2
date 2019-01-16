@@ -6,12 +6,15 @@ public class DataBaseConnector {
 
     private Connection connection;
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     public void connect() {
         try {
             connection = DriverManager
                     .getConnection("jdbc:postgresql://localhost:5432/queststore",
                             "queststore", "123");
-            System.out.println("Open database succesfully");
         } catch (Exception e) {
             e.printStackTrace();
         }
