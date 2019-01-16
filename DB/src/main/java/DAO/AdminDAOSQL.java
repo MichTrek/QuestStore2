@@ -26,7 +26,18 @@ public class AdminDAOSQL implements AdminDAOInterface{
     }
 
     @Override
-    public void createClass() {
+    public void createClass(String class_name) {
+        String sql = "INSERT INTO class (class_name)" +
+                "VALUES(?);";
+        try {
+            dataBaseConnector.connect();
+            PreparedStatement stmt = dataBaseConnector.getConnection().prepareStatement(sql);
+            stmt.setString(1, class_name);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -36,8 +47,9 @@ public class AdminDAOSQL implements AdminDAOInterface{
     }
 
     @Override
-    public ResultSet showMentorById() {
-        return null;
+    public ResultSet showMentorById(int id) {
+        ResultSet rs = dataBaseConnector.query("SELECT * FROM mentors WHERE id ="+id);
+        return rs;
     }
 
     @Override
@@ -47,5 +59,7 @@ public class AdminDAOSQL implements AdminDAOInterface{
     public static void main(String[] args) {
         AdminDAOSQL adminDAOSQL = new AdminDAOSQL();
         adminDAOSQL.createMentor("adam","maczek","asd@assa.pl","0700990880l");
+        adminDAOSQL.createClass("klsaas");
+        adminDAOSQL.showMentorById(1);
     }
 }

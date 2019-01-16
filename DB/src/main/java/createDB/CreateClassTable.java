@@ -12,7 +12,8 @@ public class CreateClassTable {
 
     public void creatingClassTable(){
         String querry = "CREATE TABLE IF NOT EXISTS class(" +
-                "id_class SERIAL PRIMARY KEY); ";
+                "id_class SERIAL PRIMARY KEY," +
+                "class_name text NOT NULL); ";
         createClass(querry);
     }
     public void createClass(String querry){
