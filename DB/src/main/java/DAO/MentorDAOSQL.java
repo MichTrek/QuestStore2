@@ -1,5 +1,7 @@
 package DAO;
 
+import View.View;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,28 +48,91 @@ DataBaseConnector dbConnector = new DataBaseConnector();
     }
 
     @Override
-    public void addQuestCategory() {
+    public void addQuestCategory(String name, int bonus) {
+        String sql = "INSERT INTO category (category_name, cool_coin_bonus) " +
+                "VALUES(?,?);";
+        try {
+            dbConnector.connect();
+            PreparedStatement stmt = dbConnector.getConnection().prepareStatement(sql);
+            stmt.setString(1,name);
+            stmt.setInt(2,bonus);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
 
     }
 
     @Override
-    public void addArtifactToShop() {
+    public void addArtifactToShop(String artifact_name, int artifact_value, int artifact_quantity) {
+        String sql;
+        PreparedStatement stmt;
+        try {
+            if (dbConnector.query("SELECT * FROM artifacts WHERE artifact_name LIKE " + " '" + artifact_name + "';").next() == false){
+                sql="INSERT INTO artifacts (artifact_name, artifact_cost, quantity) " +
+                        "VALUES (?,?,?);";
+                dbConnector.connect();
+                stmt = dbConnector.getConnection().prepareStatement(sql);
+                stmt.setString(1, artifact_name);
+                stmt.setInt(2, artifact_value);
+                stmt.setInt(3, artifact_quantity);
+                stmt.executeUpdate();
+            }
+            else {
+                sql = "UPDATE artifacts SET quantity = quantity + ?" +
+                        "WHERE artifact_name = ?;";
+                dbConnector.connect();
+                stmt = dbConnector.getConnection().prepareStatement(sql);
+                stmt.setInt(1,artifact_quantity);
+                stmt.setString(2,artifact_name);
+                stmt.executeUpdate();
+            }
 
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void editQuest() {
-
+    public void editQuest(int id, String quest_name, int quest_value, int quest_category) {
+        String sql;
+        sql = "UPDATE artifacts SET quest_name = ?, quest_value = ?, quest_category = ?" +
+                "WHERE quest_id = ?;";
+        dbConnector.connect();
+        try {
+            PreparedStatement stmt = dbConnector.getConnection().prepareStatement(sql);
+            stmt.setString(1, quest_name);
+            stmt.setInt(2, quest_value);
+            stmt.setInt(3, quest_category);
+            stmt.setInt(4, id);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e){}
     }
 
     @Override
-    public void archiveQuest() {
+    public void archiveQuest(int id_student, int id_quest, String status) {
+        String sql;
+        sql = "UPDATE students_quests SET quest_status = ?" +
+                "WHERE id_quest= ? AND id_student = ?;";
+        dbConnector.connect();
+        try {
+            PreparedStatement stmt = dbConnector.getConnection().prepareStatement(sql);
+            stmt.setString(1, status);
+            stmt.setInt(2, id_quest);
+            stmt.setInt(3, id_student);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e){}
 
     }
 
     @Override
     public ResultSet showStudents(){
-        return null;
+
+        return dbConnector.query("SELECT first_name, last_name, email, phone_number FROM students");
     }
 
     @Override
@@ -78,7 +143,11 @@ DataBaseConnector dbConnector = new DataBaseConnector();
 
     public static void main(String[] args) {
         MentorDAOSQL mds = new MentorDAOSQL();
+        View view = new View();
         mds.createStudent("adam","maczek","1b","anna.naan@buziaczek.pl","0700990880",45,0);
-        mds.addQuest("zrobic_sniadanie",100, 2);
+      //  mds.addQuest("zrobic_sniadanie",100, 2);
+        mds.addArtifactToShop("skecz",10,2);
+        view.printResultSet(mds.showStudents());
+
     }
 }

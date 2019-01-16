@@ -3,7 +3,7 @@ package createDB;
 import DAO.DataBaseConnector;
 
 public class CreateArtifactsTable {
-    DataBaseConnector dbConnector = new DataBaseConnector();
+    private DataBaseConnector dbConnector = new DataBaseConnector();
 
     public CreateArtifactsTable(){
         this.dbConnector.connect();
@@ -12,7 +12,7 @@ public class CreateArtifactsTable {
 
     public void creatingArtifactsTable(){
         String querry = "CREATE TABLE IF NOT EXISTS artifacts(" +
-                "id_artifact SERIAL, " +
+                "id_artifact SERIAL PRIMARY KEY, " +
                 "artifact_name TEXT, " +
                 "artifact_cost INTEGER, " +
                 "quantity INTEGER); ";

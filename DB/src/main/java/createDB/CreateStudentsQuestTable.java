@@ -3,7 +3,7 @@ package createDB;
 import DAO.DataBaseConnector;
 
 public class CreateStudentsQuestTable {
-    DataBaseConnector dbConnector = new DataBaseConnector();
+    private DataBaseConnector dbConnector = new DataBaseConnector();
 
     public CreateStudentsQuestTable(){
         this.dbConnector.connect();

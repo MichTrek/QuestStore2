@@ -8,13 +8,13 @@ public interface MentorDAOInterface {
 
     void addQuest(String quest_name, int quest_value, int category);
 
-    void addQuestCategory();
+    void addQuestCategory(String category_name, int cool_coins_bonus);
 
-    void addArtifactToShop();
+    void addArtifactToShop(String artifact_name, int artifact_value, int artifact_quantity);
 
-    void editQuest();
+    void editQuest(int id, String quest_name, int quest_value, int quest_category);
 
-    void archiveQuest();
+    void archiveQuest(int id_student, int id_quest, String status);
 
     ResultSet showStudents();
 

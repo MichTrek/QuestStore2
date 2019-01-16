@@ -11,5 +11,6 @@ public class CreateDB {
         CreateStudentArtifactTable createStudentArtifactTable1 = new CreateStudentArtifactTable();
         CreateClassTable createClassTable = new CreateClassTable();
         CreateStudentTable createStudentTable = new CreateStudentTable();
+        CreateCategoryTable createCategoryTable = new CreateCategoryTable();
     }
 }
