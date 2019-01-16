@@ -2,9 +2,21 @@ package View;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class View {
+
+    public void print(String text) {
+        System.out.println(text);
+    }
+
+    public String input() {
+        String input = "";
+        Scanner sc = new Scanner(System.in);
+        input = sc.nextLine();
+        return input;
+    }
 
     public void printResultSet(ResultSet rs){
         try {
@@ -21,10 +33,10 @@ public class View {
         }
     }
 
-    public String input(){
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-
+    public void printListOfResultSet(List<ResultSet> resultSetList){
+        for (ResultSet rs:resultSetList){
+            printResultSet(rs);
+        }
     }
 
 }

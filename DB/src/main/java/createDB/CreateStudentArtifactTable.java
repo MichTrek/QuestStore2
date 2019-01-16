@@ -10,6 +10,7 @@ public class CreateStudentArtifactTable {
         String sql = "CREATE TABLE IF NOT EXISTS students_artifacts (" +
                 "id_artifact int NOT NULL," +
                 "id_student int NOT NULL" +
+                "quantity int" +
                 ");";
         DataBaseConnector dataBaseConnector = new DataBaseConnector();
         dataBaseConnector.updateQuery(sql);
