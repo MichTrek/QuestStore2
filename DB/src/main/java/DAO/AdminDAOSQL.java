@@ -42,7 +42,6 @@ public class AdminDAOSQL implements AdminDAOInterface {
 
     @Override
     public void editMentor(String columnToChange, String update, int id) {
-//        String sql = "UPDATE mentors SET " + columnToChange + " = '" + update + "' WHERE id = " + id + " ;";
         String sql ="UPDATE mentors SET "+columnToChange+" = ? WHERE id = ?;";
         try {
             dataBaseConnector.connect();
@@ -58,8 +57,7 @@ public class AdminDAOSQL implements AdminDAOInterface {
 
     @Override
     public ResultSet showMentorById(int id) {
-        ResultSet rs = dataBaseConnector.query("SELECT * FROM mentors WHERE id =" + id);
-        return rs;
+        return dataBaseConnector.query("SELECT * FROM mentors WHERE id =" + id);
     }
 
     @Override
