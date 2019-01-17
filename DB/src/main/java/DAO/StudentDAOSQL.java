@@ -2,7 +2,9 @@ package DAO;
 
 import View.View;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,25 @@ public class StudentDAOSQL implements StudentDAOInterface {
     }
 
     @Override
-    public void buyArtifacts() {
+    public void buyArtifacts(int howMuch, int id_artifact, int id_student) {
+//        student 1 chce kupic 2 artifact ilosc 5, wiec w artifacts updateuje quantity o minus 5 dla artifactu 2
+//        student 1 traci cool_coinsy o ilosc artifact value * ilosc kupionych,
+//        students artifact table ma insertowane lub updateowane ze student 1 ma 5 artifactow nr 2
+        String sql = "UPDATE artifacts SET quantity = quantity-? WHERE id_artifact = ?;" +
+                "UPDATE students SET cool_coins = cool_coins - ((SELECT artifact_value FROM artifacts WHERE id_artifact = ?) * ?) WHERE students.id = ?;";
+
+        try {
+            dataBaseConnector.connect();
+            PreparedStatement stmt = dataBaseConnector.getConnection().prepareStatement(sql);
+            stmt.setInt(1,howMuch);
+            stmt.setInt(2,id_artifact);
+            stmt.setInt(3,id_artifact);
+            stmt.setInt(4,howMuch);
+            stmt.setInt(5,id_student);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
