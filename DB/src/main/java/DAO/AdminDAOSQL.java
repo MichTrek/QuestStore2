@@ -1,6 +1,6 @@
 package DAO;
 
-import View.View;
+import model.Mentor;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,8 +58,24 @@ public class AdminDAOSQL implements AdminDAOInterface {
     }
 
     @Override
-    public ResultSet showMentorById(int id) {
-        return dataBaseConnector.query("SELECT * FROM mentors WHERE id =" + id);
+    public Mentor showMentorById(int idMentor) {
+//        return dataBaseConnector.query("SELECT * FROM mentors WHERE id =" + id+";");
+        ResultSet rs = dataBaseConnector.query("SELECT * FROM mentors WHERE id =" + idMentor + ";");
+        Mentor mentor = null;
+        try {
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String first_name = rs.getString("first_name");
+                String last_name = rs.getString("last_name");
+                String email = rs.getString("email");
+                String phone_number = rs.getString("phone_number");
+                mentor = new Mentor(id, first_name, last_name, email, phone_number);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mentor;
     }
 
     @Override
@@ -72,7 +88,7 @@ public class AdminDAOSQL implements AdminDAOInterface {
 //        AdminDAOSQL adminDAOSQL = new AdminDAOSQL();
 //        adminDAOSQL.createMentor("adam", "maczek", "asd@assa.pl", "0700990880l");
 //        adminDAOSQL.createClass("klsaas");
-//        view.printResultSet(adminDAOSQL.showMentorById(1));
+//        view.printMentor(adminDAOSQL.showMentorById(1));
 //        adminDAOSQL.editMentor("email", "piotrek3", 2);
 //    }
 }
