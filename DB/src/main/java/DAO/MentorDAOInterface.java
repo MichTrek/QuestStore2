@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.ResultSet;
+import java.util.List;
 
 public interface MentorDAOInterface {
 
@@ -18,6 +19,6 @@ public interface MentorDAOInterface {
 
     ResultSet showStudents();
 
-    ResultSet showStudentsWallet();
+    List<ResultSet> showStudentsWallet(int id_student);
 
 }

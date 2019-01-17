@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MentorDAOSQL implements MentorDAOInterface {
 DataBaseConnector dbConnector = new DataBaseConnector();
@@ -66,11 +68,10 @@ DataBaseConnector dbConnector = new DataBaseConnector();
 
     @Override
     public void addArtifactToShop(String artifact_name, int artifact_value, int artifact_quantity) {
-        String sql;
         PreparedStatement stmt;
         try {
             if (dbConnector.query("SELECT * FROM artifacts WHERE artifact_name LIKE " + " '" + artifact_name + "';").next() == false){
-                sql="INSERT INTO artifacts (artifact_name, artifact_cost, quantity) " +
+               String  sql="INSERT INTO artifacts (artifact_name, artifact_cost, quantity) " +
                         "VALUES (?,?,?);";
                 dbConnector.connect();
                 stmt = dbConnector.getConnection().prepareStatement(sql);
@@ -80,7 +81,7 @@ DataBaseConnector dbConnector = new DataBaseConnector();
                 stmt.executeUpdate();
             }
             else {
-                sql = "UPDATE artifacts SET quantity = quantity + ?" +
+                String sql = "UPDATE artifacts SET quantity = quantity + ?" +
                         "WHERE artifact_name = ?;";
                 dbConnector.connect();
                 stmt = dbConnector.getConnection().prepareStatement(sql);
@@ -97,8 +98,7 @@ DataBaseConnector dbConnector = new DataBaseConnector();
 
     @Override
     public void editQuest(int id, String quest_name, int quest_value, int quest_category) {
-        String sql;
-        sql = "UPDATE artifacts SET quest_name = ?, quest_value = ?, quest_category = ?" +
+        String sql = "UPDATE artifacts SET quest_name = ?, quest_value = ?, quest_category = ?" +
                 "WHERE quest_id = ?;";
         dbConnector.connect();
         try {
@@ -114,8 +114,7 @@ DataBaseConnector dbConnector = new DataBaseConnector();
 
     @Override
     public void archiveQuest(int id_student, int id_quest, String status) {
-        String sql;
-        sql = "UPDATE students_quests SET quest_status = ?" +
+        String sql = "UPDATE students_quests SET quest_status = ?" +
                 "WHERE id_quest= ? AND id_student = ?;";
         dbConnector.connect();
         try {
@@ -136,9 +135,14 @@ DataBaseConnector dbConnector = new DataBaseConnector();
     }
 
     @Override
-    public ResultSet showStudentsWallet() {
+    public List<ResultSet> showStudentsWallet(int id) {
+        List<ResultSet> resultSetList = new ArrayList<>();
+        ResultSet rs = dbConnector.query("SELECT cool_coins FROM students WHERE id ="+id);
+        ResultSet rs2 = dbConnector.query("SELECT artifact_name FROM artifacts RIGHT JOIN students_artifacts ON artifacts.id_artifact = students_artifacts.id_artifact WHERE students_artifacts.id_student = "+id);
+        resultSetList.add(rs);
+        resultSetList.add(rs2);
+        return resultSetList;
 
-        return null;
     }
 
     public static void main(String[] args) {
@@ -148,6 +152,8 @@ DataBaseConnector dbConnector = new DataBaseConnector();
       //  mds.addQuest("zrobic_sniadanie",100, 2);
         mds.addArtifactToShop("skecz",10,2);
         view.printResultSet(mds.showStudents());
+        view.printResultSet(mds.showStudentsWallet(1).get(0));
+        view.printResultSet(mds.showStudentsWallet(1).get(1));
 
     }
 }
