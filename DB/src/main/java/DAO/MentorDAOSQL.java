@@ -71,29 +71,39 @@ DataBaseConnector dbConnector = new DataBaseConnector();
         PreparedStatement stmt;
         try {
             if (dbConnector.query("SELECT * FROM artifacts WHERE artifact_name LIKE " + " '" + artifact_name + "';").next() == false){
-               String  sql="INSERT INTO artifacts (artifact_name, artifact_cost, quantity) " +
-                        "VALUES (?,?,?);";
-                dbConnector.connect();
-                stmt = dbConnector.getConnection().prepareStatement(sql);
-                stmt.setString(1, artifact_name);
-                stmt.setInt(2, artifact_value);
-                stmt.setInt(3, artifact_quantity);
-                stmt.executeUpdate();
+                insertIntoArtifactToshop(artifact_name, artifact_value, artifact_quantity);
             }
             else {
-                String sql = "UPDATE artifacts SET quantity = quantity + ?" +
-                        "WHERE artifact_name = ?;";
-                dbConnector.connect();
-                stmt = dbConnector.getConnection().prepareStatement(sql);
-                stmt.setInt(1,artifact_quantity);
-                stmt.setString(2,artifact_name);
-                stmt.executeUpdate();
+                updateArtifactToShop(artifact_name, artifact_quantity);
             }
 
         }
         catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    private void updateArtifactToShop(String artifact_name, int artifact_quantity) throws SQLException {
+        PreparedStatement stmt;
+        String sql = "UPDATE artifacts SET quantity = quantity + ?" +
+                "WHERE artifact_name = ?;";
+        dbConnector.connect();
+        stmt = dbConnector.getConnection().prepareStatement(sql);
+        stmt.setInt(1,artifact_quantity);
+        stmt.setString(2,artifact_name);
+        stmt.executeUpdate();
+    }
+
+    private void insertIntoArtifactToshop(String artifact_name, int artifact_value, int artifact_quantity) throws SQLException {
+        PreparedStatement stmt;
+        String  sql="INSERT INTO artifacts (artifact_name, artifact_cost, quantity) " +
+                 "VALUES (?,?,?);";
+        dbConnector.connect();
+        stmt = dbConnector.getConnection().prepareStatement(sql);
+        stmt.setString(1, artifact_name);
+        stmt.setInt(2, artifact_value);
+        stmt.setInt(3, artifact_quantity);
+        stmt.executeUpdate();
     }
 
     @Override
