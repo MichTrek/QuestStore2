@@ -150,15 +150,15 @@ public class MentorDAOSQL implements MentorDAOInterface {
 
     }
 
-//    public static void main(String[] args) {
-//        MentorDAOSQL mds = new MentorDAOSQL();
-//        View view = new View();
+    public static void main(String[] args) {
+        MentorDAOSQL mds = new MentorDAOSQL();
+        View view = new View();
 //        mds.createStudent("adam", "maczek", "1b", "anna.naan@buziaczek.pl", "0700990880", 45, 0);
 //          mds.addQuest("zrobic_sniadanie",100, 2);
 //        mds.addArtifactToShop("skecz", 10, 2);
 //        view.printResultSet(mds.showStudents());
-//        view.printResultSet(mds.showStudentsWallet(1).get(0));
-//        view.printResultSet(mds.showStudentsWallet(1).get(1));
-//
-//    }
+        view.printResultSet(mds.showStudentsWallet(3).get(0));
+        view.printResultSet(mds.showStudentsWallet(3).get(1));
+
+    }
 }
