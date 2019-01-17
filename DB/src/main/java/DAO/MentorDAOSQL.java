@@ -5,12 +5,12 @@ import View.View;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MentorDAOSQL implements MentorDAOInterface {
-DataBaseConnector dbConnector = new DataBaseConnector();
+    DataBaseConnector dbConnector = new DataBaseConnector();
+
     @Override
     public void createStudent(String name, String last_name, String _class, String email, String phone_number, int coolCoins, int lvl) {
         String sql = "INSERT INTO students (first_name, last_name, class, email, phone_number, cool_coins, level) " +
@@ -18,17 +18,16 @@ DataBaseConnector dbConnector = new DataBaseConnector();
         try {
             dbConnector.connect();
             PreparedStatement stmt = dbConnector.getConnection().prepareStatement(sql);
-            stmt.setString(1,name);
-            stmt.setString(2,last_name);
-            stmt.setString(3,_class);
-            stmt.setString(4,email);
-            stmt.setString(5,phone_number);
-            stmt.setInt(6,coolCoins);
-            stmt.setInt(7,lvl);
+            stmt.setString(1, name);
+            stmt.setString(2, last_name);
+            stmt.setString(3, _class);
+            stmt.setString(4, email);
+            stmt.setString(5, phone_number);
+            stmt.setInt(6, coolCoins);
+            stmt.setInt(7, lvl);
             stmt.executeUpdate();
-        }
-        catch (SQLException e){
-           e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -39,12 +38,11 @@ DataBaseConnector dbConnector = new DataBaseConnector();
         try {
             dbConnector.connect();
             PreparedStatement stmt = dbConnector.getConnection().prepareStatement(sql);
-            stmt.setString(1,quest_name);
-            stmt.setInt(2,quest_value);
-            stmt.setInt(3,category);
+            stmt.setString(1, quest_name);
+            stmt.setInt(2, quest_value);
+            stmt.setInt(3, category);
             stmt.executeUpdate();
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -56,11 +54,10 @@ DataBaseConnector dbConnector = new DataBaseConnector();
         try {
             dbConnector.connect();
             PreparedStatement stmt = dbConnector.getConnection().prepareStatement(sql);
-            stmt.setString(1,name);
-            stmt.setInt(2,bonus);
+            stmt.setString(1, name);
+            stmt.setInt(2, bonus);
             stmt.executeUpdate();
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -70,15 +67,13 @@ DataBaseConnector dbConnector = new DataBaseConnector();
     public void addArtifactToShop(String artifact_name, int artifact_value, int artifact_quantity) {
         PreparedStatement stmt;
         try {
-            if (dbConnector.query("SELECT * FROM artifacts WHERE artifact_name LIKE " + " '" + artifact_name + "';").next() == false){
+            if (dbConnector.query("SELECT * FROM artifacts WHERE artifact_name LIKE " + " '" + artifact_name + "';").next() == false) {
                 insertIntoArtifactToshop(artifact_name, artifact_value, artifact_quantity);
-            }
-            else {
+            } else {
                 updateArtifactToShop(artifact_name, artifact_quantity);
             }
 
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -89,15 +84,15 @@ DataBaseConnector dbConnector = new DataBaseConnector();
                 "WHERE artifact_name = ?;";
         dbConnector.connect();
         stmt = dbConnector.getConnection().prepareStatement(sql);
-        stmt.setInt(1,artifact_quantity);
-        stmt.setString(2,artifact_name);
+        stmt.setInt(1, artifact_quantity);
+        stmt.setString(2, artifact_name);
         stmt.executeUpdate();
     }
 
     private void insertIntoArtifactToshop(String artifact_name, int artifact_value, int artifact_quantity) throws SQLException {
         PreparedStatement stmt;
-        String  sql="INSERT INTO artifacts (artifact_name, artifact_cost, quantity) " +
-                 "VALUES (?,?,?);";
+        String sql = "INSERT INTO artifacts (artifact_name, artifact_cost, quantity) " +
+                "VALUES (?,?,?);";
         dbConnector.connect();
         stmt = dbConnector.getConnection().prepareStatement(sql);
         stmt.setString(1, artifact_name);
@@ -118,8 +113,8 @@ DataBaseConnector dbConnector = new DataBaseConnector();
             stmt.setInt(3, quest_category);
             stmt.setInt(4, id);
             stmt.executeUpdate();
+        } catch (SQLException e) {
         }
-        catch (SQLException e){}
     }
 
     @Override
@@ -133,13 +128,13 @@ DataBaseConnector dbConnector = new DataBaseConnector();
             stmt.setInt(2, id_quest);
             stmt.setInt(3, id_student);
             stmt.executeUpdate();
+        } catch (SQLException e) {
         }
-        catch (SQLException e){}
 
     }
 
     @Override
-    public ResultSet showStudents(){
+    public ResultSet showStudents() {
 
         return dbConnector.query("SELECT first_name, last_name, email, phone_number FROM students");
     }
@@ -147,23 +142,23 @@ DataBaseConnector dbConnector = new DataBaseConnector();
     @Override
     public List<ResultSet> showStudentsWallet(int id) {
         List<ResultSet> resultSetList = new ArrayList<>();
-        ResultSet rs = dbConnector.query("SELECT cool_coins FROM students WHERE id ="+id);
-        ResultSet rs2 = dbConnector.query("SELECT artifact_name FROM artifacts RIGHT JOIN students_artifacts ON artifacts.id_artifact = students_artifacts.id_artifact WHERE students_artifacts.id_student = "+id);
+        ResultSet rs = dbConnector.query("SELECT cool_coins FROM students WHERE id =" + id);
+        ResultSet rs2 = dbConnector.query("SELECT artifact_name FROM artifacts RIGHT JOIN students_artifacts ON artifacts.id_artifact = students_artifacts.id_artifact WHERE students_artifacts.id_student = " + id);
         resultSetList.add(rs);
         resultSetList.add(rs2);
         return resultSetList;
 
     }
 
-    public static void main(String[] args) {
-        MentorDAOSQL mds = new MentorDAOSQL();
-        View view = new View();
-        mds.createStudent("adam","maczek","1b","anna.naan@buziaczek.pl","0700990880",45,0);
-      //  mds.addQuest("zrobic_sniadanie",100, 2);
-        mds.addArtifactToShop("skecz",10,2);
-        view.printResultSet(mds.showStudents());
-        view.printResultSet(mds.showStudentsWallet(1).get(0));
-        view.printResultSet(mds.showStudentsWallet(1).get(1));
-
-    }
+//    public static void main(String[] args) {
+//        MentorDAOSQL mds = new MentorDAOSQL();
+//        View view = new View();
+//        mds.createStudent("adam", "maczek", "1b", "anna.naan@buziaczek.pl", "0700990880", 45, 0);
+//          mds.addQuest("zrobic_sniadanie",100, 2);
+//        mds.addArtifactToShop("skecz", 10, 2);
+//        view.printResultSet(mds.showStudents());
+//        view.printResultSet(mds.showStudentsWallet(1).get(0));
+//        view.printResultSet(mds.showStudentsWallet(1).get(1));
+//
+//    }
 }

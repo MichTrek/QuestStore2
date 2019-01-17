@@ -18,23 +18,22 @@ public class View {
         return input;
     }
 
-    public void printResultSet(ResultSet rs){
+    public void printResultSet(ResultSet rs) {
         try {
             int columnAmount = rs.getMetaData().getColumnCount();
             while (rs.next()) {
-                for(int i=1; i<=columnAmount; i++){
-                    System.out.print(rs.getObject(i)+" ");
+                for (int i = 1; i <= columnAmount; i++) {
+                    System.out.print(rs.getObject(i) + " ");
                 }
                 System.out.println();
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
-    public void printListOfResultSet(List<ResultSet> resultSetList){
-        for (ResultSet rs:resultSetList){
+    public void printListOfResultSet(List<ResultSet> resultSetList) {
+        for (ResultSet rs : resultSetList) {
             printResultSet(rs);
         }
     }

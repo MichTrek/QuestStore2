@@ -3,9 +3,10 @@ package createDB;
 import DAO.DataBaseConnector;
 
 public class CreateMentorTable {
-    public CreateMentorTable(){
+    public CreateMentorTable() {
         createMentorTable();
     }
+
     public void createMentorTable() {
         String sql = "CREATE TABLE IF NOT EXISTS mentors (" +
                 "ID SERIAL NOT NULL PRIMARY KEY," +

@@ -5,12 +5,12 @@ import DAO.DataBaseConnector;
 public class CreateStudentTable {
     private DataBaseConnector dbConnector = new DataBaseConnector();
 
-    public CreateStudentTable(){
+    public CreateStudentTable() {
         this.dbConnector.connect();
         creatingStudentTable();
     }
 
-    public void creatingStudentTable(){
+    public void creatingStudentTable() {
         String querry = "CREATE TABLE IF NOT EXISTS students(" +
                 "id SERIAL PRIMARY KEY, " +
                 "first_name TEXT, " +
@@ -22,7 +22,8 @@ public class CreateStudentTable {
                 "level INTEGER); ";
         createStudent(querry);
     }
-    public void createStudent(String querry){
+
+    public void createStudent(String querry) {
         String sql = querry;
         this.dbConnector.updateQuery(sql);
     }

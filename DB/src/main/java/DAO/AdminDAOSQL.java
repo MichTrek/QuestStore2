@@ -44,12 +44,12 @@ public class AdminDAOSQL implements AdminDAOInterface {
 
     @Override
     public void editMentor(String columnToChange, String update, int id) {
-        String sql ="UPDATE mentors SET "+columnToChange+" = ? WHERE id = ?;";
+        String sql = "UPDATE mentors SET " + columnToChange + " = ? WHERE id = ?;";
         try {
             dataBaseConnector.connect();
             PreparedStatement stmt = dataBaseConnector.getConnection().prepareStatement(sql);
-            stmt.setString(1,update);
-            stmt.setInt(2,id);
+            stmt.setString(1, update);
+            stmt.setInt(2, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,12 +67,12 @@ public class AdminDAOSQL implements AdminDAOInterface {
 
     }
 
-    public static void main(String[] args) {
-        View view = new View();
-        AdminDAOSQL adminDAOSQL = new AdminDAOSQL();
-        adminDAOSQL.createMentor("adam", "maczek", "asd@assa.pl", "0700990880l");
-        adminDAOSQL.createClass("klsaas");
-        view.printResultSet(adminDAOSQL.showMentorById(1));
-        adminDAOSQL.editMentor("email", "piotrek3", 2);
-    }
+//    public static void main(String[] args) {
+//        View view = new View();
+//        AdminDAOSQL adminDAOSQL = new AdminDAOSQL();
+//        adminDAOSQL.createMentor("adam", "maczek", "asd@assa.pl", "0700990880l");
+//        adminDAOSQL.createClass("klsaas");
+//        view.printResultSet(adminDAOSQL.showMentorById(1));
+//        adminDAOSQL.editMentor("email", "piotrek3", 2);
+//    }
 }

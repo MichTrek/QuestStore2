@@ -5,12 +5,12 @@ import DAO.DataBaseConnector;
 public class CreateQuestTable {
     private DataBaseConnector dbConnector = new DataBaseConnector();
 
-    public CreateQuestTable(){
+    public CreateQuestTable() {
         this.dbConnector.connect();
         creatingQuestTable();
     }
 
-    public void creatingQuestTable(){
+    public void creatingQuestTable() {
         String querry = "CREATE TABLE IF NOT EXISTS quests(" +
                 "id SERIAL PRIMARY KEY, " +
                 "quest_name TEXT, " +
@@ -18,7 +18,8 @@ public class CreateQuestTable {
                 "quest_category INTEGER); ";
         createQuest(querry);
     }
-    public void createQuest(String querry){
+
+    public void createQuest(String querry) {
         String sql = querry;
         this.dbConnector.updateQuery(sql);
     }
