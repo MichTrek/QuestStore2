@@ -1,5 +1,7 @@
 package DAO;
 
+import model.Student;
+
 import java.sql.ResultSet;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public interface MentorDAOInterface {
 
     void archiveQuest(int id_student, int id_quest, String status);
 
-    ResultSet showStudents();
+    List<Student> showStudents();
 
     List<ResultSet> showStudentsWallet(int id_student);
 

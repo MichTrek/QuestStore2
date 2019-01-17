@@ -1,5 +1,7 @@
 package View;
 
+import model.Student;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -35,6 +37,18 @@ public class View {
     public void printListOfResultSet(List<ResultSet> resultSetList) {
         for (ResultSet rs : resultSetList) {
             printResultSet(rs);
+        }
+    }
+
+    public void printStudent(Student student){
+        System.out.println("id: "+student.getId()+" | "+"name: "+student.getFirst_name()+" | "+"last name: " +
+                student.getLast_name()+" | "+"class: "+student.getClas()+" | "+"email: "+student.getEmail()+" | "+"phone number: " +
+                student.getPhone_number()+" | "+"cool coins: "+student.getCoolCoins()+" | "+"level: "+student.getLevel()+" | ");
+    }
+
+    public void printStudentList(List<Student> studentList){
+        for(Student student: studentList){
+            printStudent(student);
         }
     }
 
