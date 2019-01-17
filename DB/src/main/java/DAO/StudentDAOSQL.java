@@ -27,11 +27,12 @@ public class StudentDAOSQL implements StudentDAOInterface {
 //        student 1 traci cool_coinsy o ilosc artifact value * ilosc kupionych,
 //        students artifact table ma insertowane lub updateowane ze student 1 ma 5 artifactow nr 2
         String sql = "UPDATE artifacts SET quantity = quantity-? WHERE id_artifact = ?;" +
-                "UPDATE students SET cool_coins = cool_coins - ((SELECT artifact_value FROM artifacts WHERE id_artifact = ?) * ?) WHERE students.id = ?;";
-
+                "UPDATE students SET cool_coins = cool_coins - ((SELECT artifact_cost FROM artifacts WHERE id_artifact = ?) * ?) WHERE students.id = ?;";
+        String sql2 ="";
         try {
             dataBaseConnector.connect();
             PreparedStatement stmt = dataBaseConnector.getConnection().prepareStatement(sql);
+            PreparedStatement stmt2 = dataBaseConnector.getConnection().prepareStatement(sql2);
             stmt.setInt(1,howMuch);
             stmt.setInt(2,id_artifact);
             stmt.setInt(3,id_artifact);
@@ -41,6 +42,27 @@ public class StudentDAOSQL implements StudentDAOInterface {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        try{
+            if (dataBaseConnector.query("SELECT * FROM students_artifacts WHERE id_artifact = " + id_artifact + " AND id_student = " + id_student + ";").next() == false) {
+                sql2 = "INSERT INTO students_artifacts VALUES (?,?,?);";
+                dataBaseConnector.connect();
+                PreparedStatement stmt = dataBaseConnector.getConnection().prepareStatement(sql2);
+                stmt.setInt(1,id_artifact);
+                stmt.setInt(2,id_student);
+                stmt.setInt(3,howMuch);
+                stmt.executeUpdate();
+            } else {
+                sql2 = "UPDATE students_artifacts SET quantity = quantity + ? WHERE id_artifact = "+id_artifact+" AND id_student = "+id_student+";";
+                dataBaseConnector.connect();
+                PreparedStatement stmt = dataBaseConnector.getConnection().prepareStatement(sql2);
+                stmt.setInt(1,howMuch);
+                stmt.executeUpdate();
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -58,8 +80,9 @@ public class StudentDAOSQL implements StudentDAOInterface {
     public static void main(String[] args) {
         StudentDAOSQL studentDAOSQL = new StudentDAOSQL();
         View view = new View();
-        view.printListOfResultSet(studentDAOSQL.showWallet(1));
-        view.printResultSet(studentDAOSQL.showMyLevel(1));
+//        view.printListOfResultSet(studentDAOSQL.showWallet(1));
+//        view.printResultSet(studentDAOSQL.showMyLevel(1));
+        studentDAOSQL.buyArtifacts(3,2,4);
 
     }
 }

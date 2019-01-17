@@ -1,5 +1,7 @@
 package DAO;
 
+import View.View;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,10 +68,11 @@ public class AdminDAOSQL implements AdminDAOInterface {
     }
 
     public static void main(String[] args) {
+        View view = new View();
         AdminDAOSQL adminDAOSQL = new AdminDAOSQL();
         adminDAOSQL.createMentor("adam", "maczek", "asd@assa.pl", "0700990880l");
         adminDAOSQL.createClass("klsaas");
-        adminDAOSQL.showMentorById(1);
+        view.printResultSet(adminDAOSQL.showMentorById(1));
         adminDAOSQL.editMentor("email", "piotrek3", 2);
     }
 }
