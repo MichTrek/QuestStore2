@@ -39,13 +39,13 @@ INSERT INTO quests_category (category_name,cool_con_bonus)
 VALUES ('hard',10);
 
 INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level)
-VALUES('Maciek','Paluszkiewicz','1a','m.p@gmail.com','341678325',12,22);
+VALUES('Maciek','Paluszkiewicz','1a','m.p@gmail.com','341678325',1200,22);
 INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level)
-VALUES('Piotr','Englert','1a','p.e@gmail.com','3434654325',15,26);
+VALUES('Piotr','Englert','1a','p.e@gmail.com','3434654325',1500,26);
 INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level)
-VALUES('Kamil','Brodziak','1a','m.p@gmail.com','3434278325',17,28);
+VALUES('Kamil','Brodziak','1a','m.p@gmail.com','3434278325',1700,28);
 INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level)
-VALUES('Hubert','Struminski','1a','m.p@gmail.com','34123325',22,42);
+VALUES('Hubert','Struminski','1a','m.p@gmail.com','34123325',2200,42);
 
 INSERT INTO students_artifacts (id_artifact,id_student,quantity)
 VALUES (2,2,3);
