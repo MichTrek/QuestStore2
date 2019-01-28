@@ -10,9 +10,9 @@ public class AdminDAOSQL implements AdminDAOInterface {
     DataBaseConnector dataBaseConnector = new DataBaseConnector();
 
     @Override
-    public void createMentor(String first_name, String last_name, String email, String phone_number) {
-        String sql = "INSERT INTO mentors (first_name, last_name, email, phone_number) " +
-                "VALUES(?,?,?,?);";
+    public void createMentor(String first_name, String last_name, String email, String phone_number, String password) {
+        String sql = "INSERT INTO mentors (first_name, last_name, email, phone_number,password) " +
+                "VALUES(?,?,?,?,?);";
         try {
             dataBaseConnector.connect();
             PreparedStatement stmt = dataBaseConnector.getConnection().prepareStatement(sql);
@@ -20,6 +20,7 @@ public class AdminDAOSQL implements AdminDAOInterface {
             stmt.setString(2, last_name);
             stmt.setString(3, email);
             stmt.setString(4, phone_number);
+            stmt.setString(5, password);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

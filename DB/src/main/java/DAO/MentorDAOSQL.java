@@ -13,9 +13,9 @@ public class MentorDAOSQL implements MentorDAOInterface {
     DataBaseConnector dbConnector = new DataBaseConnector();
 
     @Override
-    public void createStudent(String name, String last_name, String _class, String email, String phone_number, int coolCoins, int lvl) {
+    public void createStudent(String name, String last_name, String _class, String email, String phone_number, int coolCoins, int lvl, String password) {
         String sql = "INSERT INTO students (first_name, last_name, class, email, phone_number, cool_coins, level) " +
-                "VALUES(?,?,?,?,?,?,?);";
+                "VALUES(?,?,?,?,?,?,?,?);";
         try {
             dbConnector.connect();
             PreparedStatement stmt = dbConnector.getConnection().prepareStatement(sql);
@@ -26,6 +26,7 @@ public class MentorDAOSQL implements MentorDAOInterface {
             stmt.setString(5, phone_number);
             stmt.setInt(6, coolCoins);
             stmt.setInt(7, lvl);
+            stmt.setString(8, password);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -169,6 +170,5 @@ public class MentorDAOSQL implements MentorDAOInterface {
 //        mds.addArtifactToShop("skecz", 10, 2);
 //        view.printResultSet(mds.showStudents());
         view.printStudentList(mds.showStudents());
-
     }
 }

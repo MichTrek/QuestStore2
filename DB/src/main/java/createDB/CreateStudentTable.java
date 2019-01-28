@@ -19,7 +19,8 @@ public class CreateStudentTable {
                 "email TEXT, " +
                 "phone_number TEXT, " +
                 "cool_coins INTEGER, " +
-                "level INTEGER); ";
+                "level INTEGER," +
+                "password text NOT NULL); ";
         createStudent(querry);
     }
 

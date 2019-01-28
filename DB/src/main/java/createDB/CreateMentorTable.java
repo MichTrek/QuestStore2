@@ -13,7 +13,8 @@ public class CreateMentorTable {
                 "first_name text NOT NULL," +
                 "last_name text NOT NULL," +
                 "email text NOT NULL," +
-                "phone_number text NOT NULL" +
+                "phone_number text NOT NULL," +
+                "password text NOT NULL" +
                 ");";
         DataBaseConnector dataBaseConnector = new DataBaseConnector();
         dataBaseConnector.updateQuery(sql);

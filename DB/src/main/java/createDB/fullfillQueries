@@ -1,5 +1,5 @@
-INSERT INTO admin (first_name, last_name,email,phone_number)
-VALUES ('Jerzy', 'Brzeczek', 'jerzy.brzeczek@gmail.com','874323123');
+INSERT INTO admin (first_name, last_name,email,phone_number,password)
+VALUES ('Jerzy', 'Brzeczek', 'jerzy.brzeczek@gmail.com','874323123','pass1');
 
 INSERT INTO artifacts (artifact_name,artifact_cost,quantity)
 VALUES('paper', 15,43);
@@ -17,12 +17,12 @@ VALUES ('1c');
 INSERT INTO class (class_name)
 VALUES ('1d');
 
-INSERT INTO mentors (first_name,last_name,email,phone_number)
-VALUES('Piotr','Brzeczek','piotr.brzeczek@gmail.com','700342124');
-INSERT INTO mentors (first_name,last_name,email,phone_number)
-VALUES('Tomek','Brzeczek','Tomek.brzeczek@gmail.com','700341239');
-INSERT INTO mentors (first_name,last_name,email,phone_number)
-VALUES('Robert','Brzeczek','Robert.brzeczek@gmail.com','700567924');
+INSERT INTO mentors (first_name,last_name,email,phone_number,password)
+VALUES('Piotr','Brzeczek','piotr.brzeczek@gmail.com','700342124','pass1');
+INSERT INTO mentors (first_name,last_name,email,phone_number,password)
+VALUES('Tomek','Brzeczek','Tomek.brzeczek@gmail.com','700341239','pass1');
+INSERT INTO mentors (first_name,last_name,email,phone_number,password)
+VALUES('Robert','Brzeczek','Robert.brzeczek@gmail.com','700567924','pass1');
 
 INSERT INTO quests (quest_name,quest_value,quest_category)
 VALUES ('create game',10,1);
@@ -38,14 +38,14 @@ VALUES ('medium',5);
 INSERT INTO quests_category (category_name,cool_con_bonus)
 VALUES ('hard',10);
 
-INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level)
-VALUES('Maciek','Paluszkiewicz','1a','m.p@gmail.com','341678325',1200,22);
-INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level)
-VALUES('Piotr','Englert','1a','p.e@gmail.com','3434654325',1500,26);
-INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level)
-VALUES('Kamil','Brodziak','1a','m.p@gmail.com','3434278325',1700,28);
-INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level)
-VALUES('Hubert','Struminski','1a','m.p@gmail.com','34123325',2200,42);
+INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level,password)
+VALUES('Maciek','Paluszkiewicz','1a','m.p@gmail.com','341678325',1200,22,'pass1');
+INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level,password)
+VALUES('Piotr','Englert','1a','p.e@gmail.com','3434654325',1500,26,'pass1');
+INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level,password)
+VALUES('Kamil','Brodziak','1a','m.p@gmail.com','3434278325',1700,28,'pass1');
+INSERT INTO students (first_name, last_name, class, email,phone_number,cool_coins,level,password)
+VALUES('Hubert','Struminski','1a','m.p@gmail.com','34123325',2200,42,'pass1');
 
 INSERT INTO students_artifacts (id_artifact,id_student,quantity)
 VALUES (2,2,3);
