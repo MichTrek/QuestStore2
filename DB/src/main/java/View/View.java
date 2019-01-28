@@ -1,6 +1,8 @@
 package View;
 
+import model.Mentor;
 import model.Student;
+import model.Wallet;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,16 +42,24 @@ public class View {
         }
     }
 
-    public void printStudent(Student student){
-        System.out.println("id: "+student.getId()+" | "+"name: "+student.getFirst_name()+" | "+"last name: " +
-                student.getLast_name()+" | "+"class: "+student.getClas()+" | "+"email: "+student.getEmail()+" | "+"phone number: " +
-                student.getPhone_number()+" | "+"cool coins: "+student.getCoolCoins()+" | "+"level: "+student.getLevel()+" | ");
+    public void printStudent(Student student) {
+        System.out.println("id: " + student.getId() + " | " + "name: " + student.getFirst_name() + " | " + "last name: " +
+                student.getLast_name() + " | " + "class: " + student.getClas() + " | " + "email: " + student.getEmail() + " | " + "phone number: " +
+                student.getPhone_number() + " | " + "cool coins: " + student.getCoolCoins() + " | " + "level: " + student.getLevel() + " | ");
     }
 
-    public void printStudentList(List<Student> studentList){
-        for(Student student: studentList){
+    public void printStudentList(List<Student> studentList) {
+        for (Student student : studentList) {
             printStudent(student);
         }
+    }
+
+    public void printMentor(Mentor mentor) {
+        System.out.println(mentor.getId() + " " + mentor.getFirst_name() + " " + mentor.getLast_name() + " " + mentor.getEmail() + " " + mentor.getPhoneNumber());
+    }
+
+    public void printWallet(Wallet wallet) {
+        System.out.println(wallet.getCoolCoinsAmount() + " " + wallet.getArtifactName() + " " + wallet.getQuantity());
     }
 
 }

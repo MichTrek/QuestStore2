@@ -1,5 +1,7 @@
 package DAO;
 
+import model.Mentor;
+
 import java.sql.ResultSet;
 
 public interface AdminDAOInterface {
@@ -9,7 +11,7 @@ public interface AdminDAOInterface {
 
     void editMentor(String columnToChange, String update, int id);
 
-    ResultSet showMentorById(int id);
+    Mentor showMentorById(int id);
 
     void createLevelOfExperience();
 }

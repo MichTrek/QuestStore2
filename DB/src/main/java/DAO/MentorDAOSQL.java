@@ -2,6 +2,7 @@ package DAO;
 
 import View.View;
 import model.Student;
+import model.Wallet;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -152,23 +153,35 @@ public class MentorDAOSQL implements MentorDAOInterface {
     }
 
     @Override
-    public List<ResultSet> showStudentsWallet(int id) {
-        List<ResultSet> resultSetList = new ArrayList<>();
+    public Wallet showStudentsWallet(int id) {
         ResultSet rs = dbConnector.query("SELECT cool_coins FROM students WHERE id =" + id);
-        ResultSet rs2 = dbConnector.query("SELECT artifact_name FROM artifacts RIGHT JOIN students_artifacts ON artifacts.id_artifact = students_artifacts.id_artifact WHERE students_artifacts.id_student = " + id);
-        resultSetList.add(rs);
-        resultSetList.add(rs2);
-        return resultSetList;
+        ResultSet rs2 = dbConnector.query("SELECT artifact_name, students_artifacts.quantity FROM artifacts RIGHT JOIN students_artifacts ON artifacts.id_artifact = students_artifacts.id_artifact WHERE students_artifacts.id_student = " + id);
+        int coolCoins = 0;
+        String artifactName = "";
+        int quantity = 0;
+        coolCoins = getCoolCoins(rs, coolCoins);
+        try {
+            while (rs2.next()) {
+                artifactName = rs2.getString("artifact_name");
+                quantity = rs2.getInt("quantity");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Wallet wallet = new Wallet(coolCoins, artifactName, quantity);
+        return wallet;
 
     }
 
-    public static void main(String[] args) {
-        MentorDAOSQL mds = new MentorDAOSQL();
-        View view = new View();
-//        mds.createStudent("adam", "maczek", "1b", "anna.naan@buziaczek.pl", "0700990880", 45, 0);
-//          mds.addQuest("zrobic_sniadanie",100, 2);
-//        mds.addArtifactToShop("skecz", 10, 2);
-//        view.printResultSet(mds.showStudents());
-        view.printStudentList(mds.showStudents());
+
+    private int getCoolCoins(ResultSet rs, int coolCoins) {
+        try {
+            while (rs.next()) {
+                coolCoins = rs.getInt("cool_coins");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return coolCoins;
     }
 }
